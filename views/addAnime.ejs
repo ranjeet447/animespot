@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <% include ./components/aHeader %>
+  </head>
+  <body>
+    <div class="container">
+      <br>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addAnimeModal">Add new Anime</button>
+      <br>
+      <div class="class="table-responsive">
+        <table class="table table-hover table-sm">
+          <% if(data){%>
+                <% data.forEach(function(a,i){%>
+                  <tr>
+                    <td><a href="/admin/addS/<%-a.name%>"><%-i+1%>.<%- a.name%> </a></td>
+                    <td>
+                      <a href="#" class="btn btn-sm btn-danger" aria-label="Delete" style="float:right;">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                      </a>
+                    </td>
+                  </tr>
+                <% }) %>
+          <%}%>
+        </table>
+
+      </div>
+    </div>
+
+
+    <!-- The Modal -->
+    <div class="modal" id="addAnimeModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Add Anime</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <form action="/admin/addAnime" method="POST">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="name" name="name" class="form-control" id="name" placeholder="name" autofocus required>
+              </div>
+              <div class="form-group">
+                <label for="genre">Genre</label><br>
+                <label class="checkbox-inline"><input type="checkbox" name="genre" value="Action">Action</label>
+                <label class="checkbox-inline"><input type="checkbox" name="genre" value="Adventure">Adventure</label>
+                <label class="checkbox-inline"><input type="checkbox" name="genre" value="Comedy">Comedy</label>
+                <label class="checkbox-inline"><input type="checkbox" name="genre" value="Drama">Drama</label>
+                <label class="checkbox-inline"><input type="checkbox" name="genre" value="Fantasy">Fantasy</label>
+                <label class="checkbox-inline"><input type="checkbox" name="genre" value="Game">Game</label>
+                <label class="checkbox-inline"><input type="checkbox" name="genre" value="Historical">Historical</label>
+                <label class="checkbox-inline"><input type="checkbox" name="genre" value="Horror">Horror</label>
+                <label class="checkbox-inline"><input type="checkbox" name="genre" value="Magic">Magic</label>
+                <label class="checkbox-inline"><input type="checkbox" name="genre" value="Martial Arts">Martial Arts</label>
+                <label class="checkbox-inline"><input type="checkbox" name="genre" value="Music">Music</label>
+                <label class="checkbox-inline"><input type="checkbox" name="genre" value="Mystery">Mystery</label>
+                <label class="checkbox-inline"><input type="checkbox" name="genre" value="Psychological">Psychological</label>
+                <label class="checkbox-inline"><input type="checkbox" name="genre" value="Romance">Romance</label>
+                <label class="checkbox-inline"><input type="checkbox" name="genre" value="Sci-Fi">Sci-Fi</label>
+                <label class="checkbox-inline"><input type="checkbox" name="genre" value="Slice of Life">Slice of Life</label>
+                <label class="checkbox-inline"><input type="checkbox" name="genre" value="Space">Space</label>
+                <label class="checkbox-inline"><input type="checkbox" name="genre" value="Special">Special</label>
+                <label class="checkbox-inline"><input type="checkbox" name="genre" value="Sports">Sports</label>
+                <label class="checkbox-inline"><input type="checkbox" name="genre" value="Super Power">Super Power</label>
+                <label class="checkbox-inline"><input type="checkbox" name="genre" value="Supernatural">Supernatural</label>
+                <label class="checkbox-inline"><input type="checkbox" name="genre" value="Thriller">Thriller</label>
+                <label class="checkbox-inline"><input type="checkbox" name="genre" value="Vampire">Vampire</label>
+              </div>
+
+              <div class="form-group">
+                <input type="radio" name="ongoing" value="true" required> Ongoing
+                <input type="radio" name="ongoing" value="false"> Finished<br>
+              </div>
+              <button type="submit" class="btn btn-primary" id="addanime">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      $('#addanime').click(function() {
+        checked = $("input[type=checkbox]:checked").length;
+        if(!checked) {
+          alert("You must check at least one checkbox.");
+          return false;
+        }
+
+      });
+    });
+    </script>
+  </body>
+</html>

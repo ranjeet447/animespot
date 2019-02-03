@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <% include ./components/header%>
+  </head>
+  <body>
+    <header>
+      <% include ./components/navbar%>
+    </header>
+
+    <main>
+      <div class="container">
+        <%if(animeList){%>
+          <%animeList.forEach(function(anime,i){%>
+            <a href="/anime/<%-anime.name%>"><%-anime.name%></a><br>
+          <%})%>
+        <%}%>
+      </div>
+    </main>
+    <footer>
+
+    </footer>
+
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+
+  </body>
+</html>

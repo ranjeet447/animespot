@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <% include ./components/aHeader %>
+  </head>
+  <body>
+    <br>
+    <div class="container">
+      <br>
+      <a href="/admin/addAnime">Home</a>
+      <% if(anime){%>
+        <a href="/admin/AddS/<%-anime.name%>" style="color:#000"><h1><u><%-anime.name%></u></h1></a>
+        <h4>Season <%-anime.sno%> - <%-anime.sname%></h4>
+      <%}%>
+
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEpModal">Add new Episode</button><br>
+
+      <%if(episodes.length>0){%>
+        <div class="">
+          <table class="table table-sm table-hover">
+            <%episodes.forEach(function(e,i){%>
+              <tr>
+                <td><a href="#"><u>Episode <%-e.episodeNo%></u> <%- e.name%></a></td>
+              </tr>
+            <%})%>
+          </table>
+        </div>
+      <%}else{%>
+        <p>no data found.</p>
+      <%}%>
+    </div>
+
+    <!-- The Modal -->
+    <div class="modal" id="addEpModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Add New Episode</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <form action="/admin/addEp/<%-anime.name%>/<%-anime.sno%>/<%-anime.sname%>" method="POST">
+              <div class="form-group">
+                <label for="number">Episode No.</label>
+                <input type="number" name="number" value="<%-episodes.length+1%>" class="form-control" id="number" min="1" required>
+              </div>
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="name" name="name" class="form-control" id="name">
+              </div>
+              <div class="form-group">
+                <label for="vid">Video Id</label>
+                <input type="text" name="vid" class="form-control" id="vid">
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+  </body>
+</html>
