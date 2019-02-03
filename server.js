@@ -35,7 +35,7 @@ app.use(pagesRoutes);
 app.use('/admin',adminRoutes);
 
 
-var port = 3000 || process.env.PORT;
+var port = process.env.PORT || 3000;
 app.listen(port,()=>{
   console.log(`sever up on port ${port}`)
 });
