@@ -48,6 +48,7 @@ router.post('/addAnime',isAdmin,(req,res)=>{
   console.log(req.body);
   var anime =new Anime({
     name:req.body.name,
+    description:req.body.description,
     genre:req.body.genre,
     ongoing:req.body.ongoing
   });

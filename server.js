@@ -34,6 +34,12 @@ app.use(session({
 app.use(pagesRoutes);
 app.use('/admin',adminRoutes);
 
+// 6Lcy044UAAAAADC8Js9prdLvjr_6Xrg-apcZzqtQ  //SITE KEY
+// 6Lcy044UAAAAAFHd7jNP8jzaFA4pd1SzQw_JRWJb  //SECRET KEY
+
+app.get("/*", function(req, res){
+    res.render("404");
+});
 
 var port = process.env.PORT || 3000;
 app.listen(port,()=>{

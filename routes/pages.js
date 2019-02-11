@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require('path');
 const router = express.Router();
+const https = require('https');
 
 const Anime = require('../db/models/anime');
 const Episode = require('../db/models/episode');
@@ -35,10 +36,30 @@ router.get('/anime/:name',(req,res)=>{
   });
 });
 
+// var SECRET = "6Lcy044UAAAAAFHd7jNP8jzaFA4pd1SzQw_JRWJb";
+// Helper function to make API call to recatpcha and check response
+// function verifyRecaptcha(key, callback) {
+//   https.get("https://www.google.com/recaptcha/api/siteverify?secret=" + SECRET + "&response=" + key, function(res) {
+//       var data = "";
+//       res.on('data', function (chunk) {
+//             data += chunk.toString();
+//       });
+//       res.on('end', function() {
+//           try {
+//                   var parsedData = JSON.parse(data);
+//                   console.log(parsedData);
+//                   callback(parsedData.success);
+//           } catch (e) {
+//                   callback(false);
+//           }
+//       });
+//   });
+// }
 router.get('/anime/play/:anime/:season/:episode',(req,res)=>{
   var name = req.params.anime;
   var season = req.params.season;
   var eNo=req.params.episode;
+
   Episode.findOne({anime:name,seasonNo:season,episodeNo:eNo},function(err,foundEpisode){
     console.log(foundEpisode);
     if(err) throw err;
@@ -46,14 +67,18 @@ router.get('/anime/play/:anime/:season/:episode',(req,res)=>{
       res.render('playAnime',{episode:foundEpisode});
     }
   });
+  // verifyRecaptcha(req.body["recaptcha"], function(success) {
+  //     if (success) {
+  //
+  //     } else {
+  //       res.redirect(`/`)
+  //     }
+  // });
 });
-
-
-
-
-
-// router.get("/*", function(req, res){
-//     res.render("404");
-// });
-
+router.get("/demo", function(req, res){
+    res.render("demo");
+});
+router.get("/recaptcha", function(req, res){
+    res.render("recaptcha");
+});
 module.exports = router;
