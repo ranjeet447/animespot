@@ -9,7 +9,7 @@
     <title>Creative Comma</title>
 
     <!-- Styles -->
-    <link href="temp/css/page.min.css" rel="stylesheet">
+    <link href="temp/css/page.css" rel="stylesheet">
     <link href="temp/css/style.css" rel="stylesheet">
 
     <!-- Favicons -->
@@ -33,7 +33,6 @@
 
         <section class="navbar-mobile">
           <span class="navbar-divider d-mobile-none"></span>
-
           <ul class="nav nav-navbar">
             <li class="nav-item">
               <a class="nav-link" href="/">Home</a>
@@ -63,11 +62,11 @@
         <div class="row">
           <div class="col-lg-8 mx-auto">
 
-            <h1>Watch <span class="text-primary" data-typing="Anime ,  Movies,  Tv Shows"></span></h1>
+            <h1>Watch <span class="text-primary"  data-typing="Anime ^1000, Movies ^1000,Tv Shows ^1000"></span></h1>
             <p class="lead-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 
-            <br>
-            <hr class="w-60px">
+            <br><br>
+            <!-- <hr class="w-60px"> -->
             <br>
 
             <a class="btn btn-lg btn-round btn-light" href="/">Watch now</a>
@@ -89,7 +88,7 @@
       | Card with Image
       |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
       !-->
-      <section id="image" class="section bg-gray">
+      <section id="image" class="section bg-black">
         <div class="container">
 
           <div class="row gap-y">
@@ -172,13 +171,13 @@
       | Slider
       |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
       !-->
-      <section class="section p-0">
+      <section class="section p-0 m-0">
         <div class="slider-arrows-flash-light slider-dots-inside slider-dots-fill-primary" data-provide="slider" data-autoplay="true" data-arrows="true" data-dots="true">
-          <div class="bg-img h-500" style="background-image: url(images/bg/2.jpg)"></div>
-          <div class="bg-img h-500" style="background-image: url(images/bg/3.jpg)"></div>
-          <div class="bg-img h-500" style="background-image: url(images/bg/4.jpg)"></div>
-          <div class="bg-img h-500" style="background-image: url(images/bg/5.jpg)"></div>
-          <div class="bg-img h-500" style="background-image: url(images/bg/6.jpg)"></div>
+          <div class="bg-img h-500" style="background-image: url(temp/img/bg/12.jpg)"></div>
+          <div class="bg-img h-500" style="background-image: url(temp/img/bg/2.jpg)"></div>
+          <div class="bg-img h-500" style="background-image: url(temp/img/bg/12.jpg)"></div>
+          <div class="bg-img h-500" style="background-image: url(temp/img/bg/7.jpg)"></div>
+          <div class="bg-img h-500" style="background-image: url(temp/img/bg/9.jpg)"></div>
         </div>
       </section>
 
@@ -309,41 +308,7 @@
 
 
     </main><!-- /.main-content -->
-
-    <br>
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <div class="row gap-y align-items-center">
-
-          <div class="col-6 col-lg-3">
-            <a href="../index.html"><img src="images/logo/logo-copy.png" alt="logo"></a>
-          </div>
-
-          <div class="col-6 col-lg-3 text-right order-lg-last">
-            <div class="social">
-              <a class="social-facebook" href="https://www.facebook.com/thethemeio"><i class="fa fa-facebook"></i></a>
-              <a class="social-twitter" href="https://twitter.com/thethemeio"><i class="fa fa-twitter"></i></a>
-              <a class="social-instagram" href="https://www.instagram.com/thethemeio/"><i class="fa fa-instagram"></i></a>
-              <a class="social-dribbble" href="https://dribbble.com/thethemeio"><i class="fa fa-dribbble"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-6">
-            <div class="nav nav-bold nav-uppercase nav-trim justify-content-lg-center">
-              <a class="nav-link" href="#">Services</a>
-              <!-- <a class="nav-link" href="#">Blocks</a> -->
-              <a class="nav-link" href="#">About</a>
-              <!-- <a class="nav-link" href="#"">Blog</a> -->
-              <a class="nav-link" href="#">Contact</a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </footer><!-- /.footer -->
-
-
+<%include ./components/footer%>
     <!-- Scripts -->
     <script src="temp/js/page.min.js"></script>
     <script src="temp/js/script.js"></script>
