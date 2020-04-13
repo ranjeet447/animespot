@@ -20,6 +20,7 @@ router.get('/',(req,res)=>{
   res.render('admin');
 });
 router.post('/admin', function(req,res){
+  console.log(req.body);
   var pass = req.body.password
   var sess=req.session;
   // console.log(pass,sess);
