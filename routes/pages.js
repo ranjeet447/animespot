@@ -19,14 +19,14 @@ router.get('/',(req,res)=>{
 });
 
 router.get('/anime/:name',(req,res)=>{
-  var name = req.params.name;
+  let name = req.params.name;
   Anime.find({name},function(err,foundAnime){
-    console.log(foundAnime);
+    // console.log(foundAnime);
     if (err) {
       throw err;
     }else{
       Episode.find({anime:name},null,{sort:{'_id': -1}},function(err,foundEpisodes){
-        console.log(foundEpisodes);
+        // console.log(foundEpisodes);
         if(err) throw err;
         else{
           res.render('anime',{anime:foundAnime,episodes:foundEpisodes});
@@ -36,17 +36,17 @@ router.get('/anime/:name',(req,res)=>{
   });
 });
 
-// var SECRET = "6Lcy044UAAAAAFHd7jNP8jzaFA4pd1SzQw_JRWJb";
+// let SECRET = "6Lcy044UAAAAAFHd7jNP8jzaFA4pd1SzQw_JRWJb";
 // Helper function to make API call to recatpcha and check response
 // function verifyRecaptcha(key, callback) {
 //   https.get("https://www.google.com/recaptcha/api/siteverify?secret=" + SECRET + "&response=" + key, function(res) {
-//       var data = "";
+//       let data = "";
 //       res.on('data', function (chunk) {
 //             data += chunk.toString();
 //       });
 //       res.on('end', function() {
 //           try {
-//                   var parsedData = JSON.parse(data);
+//                   let parsedData = JSON.parse(data);
 //                   console.log(parsedData);
 //                   callback(parsedData.success);
 //           } catch (e) {
@@ -56,12 +56,12 @@ router.get('/anime/:name',(req,res)=>{
 //   });
 // }
 router.get('/anime/play/:anime/:season/:episode',(req,res)=>{
-  var name = req.params.anime;
-  var season = req.params.season;
-  var eNo=req.params.episode;
+  let name = req.params.anime;
+  let season = req.params.season;
+  let eNo=req.params.episode;
 
   Episode.findOne({anime:name,seasonNo:season,episodeNo:eNo},function(err,foundEpisode){
-    console.log(foundEpisode);
+    // console.log(foundEpisode);
     if(err) throw err;
     else{
       res.render('playAnime',{episode:foundEpisode});

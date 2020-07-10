@@ -1,70 +1,105 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <% include ./components/aHeader %>
-  </head>
-  <body>
+
+<head>
+  <% include ./components/aHeader %>
+</head>
+
+<body>
+  <br>
+
+  <div class="container">
     <br>
-
-    <div class="container">
+    <a href="/admin/addAnime">Home</a>
+    <div class="">
+      <% if(data){%>
+      <h1><u><%=data[0].name%></u></h1>
+      <b>Genre</b> : <span><%-data[0].genre%></span><br>
+      <b>Status</b> : <span><%-(data[0].ongoing)?'Ongoing':'Finished'%></span>
       <br>
-      <a href="/admin/addAnime">Home</a>
-      <div class="">
-        <% if(data){%>
-            <h1><u><%=data[0].name%></u></h1>
-            <b>Genre</b> : <span><%-data[0].genre%></span><br>
-            <b>Status</b> : <span><%-(data[0].ongoing)?'Ongoing':'Finished'%></span>
-            <br>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSeasonModal">Add new season</button><br>
-              <% data.forEach(function(a){%>
-                <!-- The Modal -->
-                <div class="modal" id="addSeasonModal">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <!-- Modal Header -->
-                      <div class="modal-header">
-                        <h4 class="modal-title">Add New Season</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      </div>
-                      <!-- Modal body -->
-                      <div class="modal-body">
-                        <form action="/admin/addSeason/<%=a.name%>" method="POST">
-                          <div class="form-group">
-                            <label for="name">Season</label>
-                            <input type="number" name="number" value="<%-a.seasons.length+1%>" class="form-control" id="number" min="1" autofocus required>
-                          </div>
-                          <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" name="name" class="form-control" id="name">
-                          </div>
-                          <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSeasonModal">Add new
+        season</button><br>
+      <% data.forEach(function(a){%>
+      <!-- The Modal -->
+      <div class="modal" id="addSeasonModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Add New Season</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+              <form action="/admin/addSeason/<%=a.name%>" method="POST">
+                <div class="form-group">
+                  <label for="name">Season</label>
+                  <input type="number" name="number" value="<%-a.seasons.length+1%>" class="form-control" id="number"
+                    min="1" autofocus required>
                 </div>
-                <%if(a.seasons.length>0){%>
-                  <table class="table table-hover table-sm">
-                    <% a.seasons.forEach(function(s){ n=(s.name)?s.name:'_'%>
-                      <tr>
-                        <td>
-                          <a href="/admin/addEp/<%-a.name%>/<%-s.number%>/<%- n%>">Season <%-s.number%> <%-s.name%></a><br>
-                        </td>
-                        <td>
-                          <a href="#" class="btn btn-sm btn-danger" aria-label="Delete" style="float:right;">
-                            <i class="fa fa-trash-o " aria-hidden="true"></i>
-                          </a>
-                        </td>
-                      </tr>
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" name="name" class="form-control" id="name">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%if(a.seasons.length>0){%>
+      <table class="table table-hover table-sm">
+        <% a.seasons.forEach(function(s){ n=(s.name)?s.name:'_'%>
+        <tr>
+          <td>
+            <a href="/admin/addEp/<%-a.name%>/<%-s.number%>/<%- n%>">Season <%-s.number%> <%-s.name%></a><br>
+          </td>
+          <td>
+            <a href="#" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#editSeasonModal<%-s.number%>"  style="float:right;">
+              <i class="fa fa-edit " aria-hidden="true"></i>
+            </a>
+          </td>
+          <td>
+            <a href="#" class="btn btn-sm btn-danger" aria-label="Delete" style="float:right;">
+              <i class="fa fa-trash-o " aria-hidden="true"></i>
+            </a>
+          </td>
+        </tr>
+        <!-- Edit Season Modal -->
+        <div class="modal" id="editSeasonModal<%-s.number%>">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <!--Edit Season Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Edit</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <!-- Edit Season Modal body -->
+              <div class="modal-body">
+                <form action="/admin/editSeason/<%=a.name%>/<%-s._id%>" method="POST">
+                  <div class="form-group">
+                    <label for="name">Season</label>
+                    <input type="number" name="number" value="<%-s.number%>" class="form-control" id="number"
+                      min="1" autofocus required>
+                  </div>
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" value="<%-s.name%>" class="form-control" id="name">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </table>
 
-                    <% }) %>
-                  </table>
-
-                <%}else{%>
-                  <p>no data found.</p>
-                <%}%>
+      <%}else{%>
+      <p>no data found.</p>
+      <%}%>
               <% }) %>
-        <%}%>
+      <%}%>
       </div>
     </div>
 

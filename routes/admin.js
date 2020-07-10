@@ -6,124 +6,189 @@ const router = express.Router();
 const Anime = require('../db/models/anime');
 const Episode = require('../db/models/episode');
 
-var ap = process.env.ADMIN || "5";
+const ap = process.env.ADMIN || "5";
 
-function isAdmin(req,res,next) {
-  if(req.session.admin){
+function isAdmin(req, res, next) {
+  if (req.session.admin) {
     next();
-  }else{
+  } else {
     res.redirect('/admin')
   }
 }
 
-router.get('/',(req,res)=>{
+router.get('/', (req, res) => {
   res.render('admin');
 });
-router.post('/admin', function(req,res){
-  console.log(req.body);
-  var pass = req.body.password
-  var sess=req.session;
+router.post('/admin', function (req, res) {
+  // console.log(req.body);
+  let pass = req.body.password
+  let sess = req.session;
   // console.log(pass,sess);
-  if(pass === ap){
-    sess.admin=true;
+  if (pass === ap) {
+    sess.admin = true;
     res.redirect('/admin/addAnime')
   }
-  else{
-    sess.admin=false;
+  else {
+    sess.admin = false;
     res.redirect('/admin')
   }
 });
 
-router.get('/addAnime',isAdmin,(req,res)=>{
-  Anime.find({},{name:1,},function(err,foundData){
+router.get('/addAnime', isAdmin, (req, res) => {
+  Anime.find({}, {}, { lean: true }, function (err, foundData) {
     if (err) {
       throw err;
-    }else{
-        res.render('addAnime',{data:foundData});
-        // console.log(foundData);
+    } else {
+      res.render('addAnime', { data: foundData });
+      // console.log(foundData);
     }
   });
 });
 
-router.post('/addAnime',isAdmin,(req,res)=>{
-  console.log(req.body);
-  var anime =new Anime({
-    name:req.body.name,
-    description:req.body.description,
-    genre:req.body.genre,
-    ongoing:req.body.ongoing
+router.post('/addAnime', isAdmin, (req, res) => {
+  // console.log(req.body);
+  let anime = new Anime({
+    name: req.body.name.trim(),
+    description: req.body.description.trim(),
+    genre: req.body.genre,
+    ongoing: req.body.ongoing
   });
-  anime.save(function(err,animeSaved){
-    if(err) throw err;
-    else{
+  anime.save(function (err, animeSaved) {
+    if (err) throw err;
+    else {
       res.redirect('/admin/addAnime');
     }
   });
 });
 
-router.get('/addS/:anime',isAdmin,(req,res)=>{
-  var name = req.params.anime;
-  Anime.find({name},function(err,foundData){
-    if (err) {
-      throw err;
-    }else{
-      console.log(foundData);
-        res.render('addS',{data:foundData});
+router.post('/editAnime/:id', isAdmin, (req, res) => {
+  // console.log(req.body);
+  let id = req.params.id;
+  let anime = {
+    name: req.body.name.trim(),
+    description: req.body.description.trim(),
+    genre: req.body.genre,
+    ongoing: req.body.ongoing
+  };
+  Anime.findOneAndUpdate({ _id: id }, { $set: anime }, function (err, animeSaved) {
+    if (err) throw err;
+    else {
+      res.redirect('/admin/addAnime');
     }
   });
 });
 
-router.post('/addSeason/:anime',isAdmin,(req,res)=>{
-  anime=req.params.anime;
-  var season={
-    number:req.body.number,
-    name:req.body.name
-  }
-  console.log("sss",season);
-  Anime.updateOne({name:anime},{$push:{seasons:season}},{ new: true },function(err,found){
+router.get('/addS/:anime', isAdmin, (req, res) => {
+  let name = req.params.anime;
+  Anime.find({ name }, function (err, foundData) {
     if (err) {
       throw err;
-    }else{
-        res.redirect(`/admin/addS/${anime}`);
+    } else {
+      // console.log(foundData);
+      res.render('addS', { data: foundData });
     }
   });
 });
 
-router.get('/addEp/:anime/:sno/:sname',isAdmin,(req,res)=>{
-  var anime={
-    name:req.params.anime,
-    sno:req.params.sno,
-    sname:req.params.sname
+router.post('/addSeason/:anime', isAdmin, (req, res) => {
+  let anime = req.params.anime;
+  let season = {
+    number: req.body.number.trim(),
+    name: req.body.name.trim()
   }
-  Episode.find({anime:req.params.anime,seasonNo:req.params.sno},null,{sort:{'_id': -1}},function(err,found){
+  // console.log("sss",season);
+  Anime.updateOne({ name: anime }, { $push: { seasons: season } }, { new: true }, function (err, found) {
+    if (err) {
+      throw err;
+    } else {
+      res.redirect(`/admin/addS/${anime}`);
+    }
+  });
+});
+
+router.post('/editSeason/:anime/:sid', isAdmin, (req, res) => {
+  let anime = req.params.anime;
+  let sid = req.params.sid;
+  let season = {
+    number: req.body.number.trim(),
+    name: req.body.name.trim()
+  }
+  // console.log("sss",season);
+  Anime.updateOne({ name: anime, "seasons._id": sid }, { $set: { "seasons.$.number": season.number, "seasons.$.name": season.name } }, { new: true }, function (err, found) {
+    if (err) {
+      throw err;
+    } else {
+      res.redirect(`/admin/addS/${anime}`);
+    }
+  });
+});
+router.get('/addEp/:anime/:sno/:sname', isAdmin, (req, res) => {
+  let anime = {
+    name: req.params.anime,
+    sno: req.params.sno,
+    sname: req.params.sname
+  }
+  Episode.find({ anime: req.params.anime, seasonNo: req.params.sno }, null, { sort: { '_id': -1 } }, function (err, found) {
     // console.log(found);
-    if(err) throw err;
-    else{
-      res.render('addEpisode',{anime:anime,episodes:found});
+    if (err) throw err;
+    else {
+      res.render('addEpisode', { anime: anime, episodes: found });
     }
   });
 });
 
-router.post('/addEp/:anime/:sno/:sname',isAdmin,(req,res)=>{
-  var anime=req.params.anime;
-  var seasonNo=req.params.sno;
-  var seasonName=req.params.sname;
-  var episode = new Episode({
-    anime:anime,
-    seasonNo:seasonNo,
-    episodeNo:req.body.number,
-    name:req.body.name,
-    vid:req.body.vid
+router.post('/addEp/:anime/:sno/:sname', isAdmin, (req, res) => {
+  let anime = req.params.anime;
+  let seasonNo = req.params.sno;
+  let seasonName = req.params.sname;
+  let episode = new Episode({
+    anime: anime,
+    seasonNo: seasonNo,
+    episodeNo: req.body.number.trim(),
+    name: req.body.name.trim(),
+    vid: req.body.vid.trim()
   });
 
-  episode.save(function(err,episodeSaved){
-    if(err) throw err;
-    else{
-      console.log(episodeSaved);
+  episode.save(function (err, episodeSaved) {
+    if (err) throw err;
+    else {
+      // console.log(episodeSaved);
       res.redirect(`/admin/addEp/${anime}/${seasonNo}/${seasonName}`)
     }
   });
 });
 
+router.post('/editEp/:anime/:sno/:sname/:eid', isAdmin, (req, res) => {
+  let id = req.params.eid;
+  let anime = req.params.anime;
+  let seasonNo = req.params.sno;
+  let seasonName = req.params.sname;
+  let episodeNo = req.body.number.trim();
+  let name = req.body.name.trim();
+  let vid = req.body.vid.trim();
+  Episode.findOneAndUpdate({ _id: id }, { $set: { episodeNo, name, vid } }, function (err, episode) {
+    // console.log(found);
+    if (err) throw err;
+    else {
+      res.redirect(`/admin/addEp/${anime}/${seasonNo}/${seasonName}`)
+    }
+  });
+});
+
+// router.get('/update', async (req, res) => {
+//   Episode.find({}, { "vid": 1 }).then(async es => {
+//     es.forEach(function (doc,i) {
+//       doc.vid = doc.vid.trim();
+//       Episode.findOneAndUpdate(
+//         { "_id": doc._id },
+//         { "$set": { "vid": doc.vid } }, { new: true }
+//       ).then((e) => {
+//         console.log(i);
+//       });
+//     }).then(() => {
+//       res.send('done')
+//     })
+//   })
+// });
 
 module.exports = router;
