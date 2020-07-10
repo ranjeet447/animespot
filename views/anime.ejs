@@ -12,7 +12,7 @@
       <div class="container">
         <%-anime[0].name%><br>
         <%episodes.forEach(function(e,i){%>
-          <a href="/anime/play/<%-e.anime%>/<%-e.seasonNo%>/<%-e.episodeNo%>">Season <%-e.seasonNo%> Episode <%-e.episodeNo%> <%-e.name%></a><br>
+          <a href="/anime/play/<%-e.anime.trim().replace(' ','-')%>/<%-e.seasonNo.trim().replace(' ','-')%>/<%-e.episodeNo.trim().replace(' ','-')%>">Season <%-e.seasonNo%> Episode <%-e.episodeNo%> <%-e.name%></a><br>
         <%})%>
       </div>
     </main>
@@ -29,6 +29,7 @@
     //        console.log("token",token);
     //        // window.location = '/anime/play/naruto/1/1'
     //     });
-    });
+    // });
+    </script>
   </body>
 </html>

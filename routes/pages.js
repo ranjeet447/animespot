@@ -19,7 +19,7 @@ router.get('/',(req,res)=>{
 });
 
 router.get('/anime/:name',(req,res)=>{
-  let name = req.params.name;
+  let name = req.params.name.trim().replace('-',' ');;
   Anime.find({name},function(err,foundAnime){
     // console.log(foundAnime);
     if (err) {
@@ -56,9 +56,9 @@ router.get('/anime/:name',(req,res)=>{
 //   });
 // }
 router.get('/anime/play/:anime/:season/:episode',(req,res)=>{
-  let name = req.params.anime;
-  let season = req.params.season;
-  let eNo=req.params.episode;
+  let name = req.params.anime.trim().replace('-',' ');
+  let season = req.params.season.trim().replace('-',' ');
+  let eNo=req.params.episode.trim().replace('-',' ');
 
   Episode.findOne({anime:name,seasonNo:season,episodeNo:eNo},function(err,foundEpisode){
     // console.log(foundEpisode);
