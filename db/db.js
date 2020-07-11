@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 // Map global promise - get rid of warning
 mongoose.Promise = global.Promise;
 // Connect to db
-mongoose.connect(process.env.MONGODB_URI ||'mongodb://127.0.0.1:27017/animespot', {useNewUrlParser: true,useUnifiedTopology: true});
+mongoose.connect(process.env.MONGODB_URI ||'mongodb://kalel:anime247@ds121295.mlab.com:21295/animespot', {useNewUrlParser: true,useUnifiedTopology: true});
 mongoose.set('useCreateIndex', true)
 mongoose.set('useFindAndModify', false);
 const db = mongoose.connection;

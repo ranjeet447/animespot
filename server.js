@@ -10,6 +10,7 @@ const bodyParser = require('body-parser');
 var session = require('express-session')
 const pagesRoutes = require('./routes/pages');
 const adminRoutes = require('./routes/admin');
+const Apis = require('./routes/api');
 
 
 
@@ -33,6 +34,7 @@ app.use(session({
 
 app.use(pagesRoutes);
 app.use('/admin',adminRoutes);
+app.use('/api',Apis);
 
 // 6Lcy044UAAAAADC8Js9prdLvjr_6Xrg-apcZzqtQ  //SITE KEY
 // 6Lcy044UAAAAAFHd7jNP8jzaFA4pd1SzQw_JRWJb  //SECRET KEY

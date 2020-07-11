@@ -18,14 +18,12 @@
         <br>
         <div class="embed-responsive embed-responsive-16by9" style="position:relative;background-color:#e4e4e4" >
           <iframe src="https://drive.google.com/file/d/<%-episode.vid.trim()%>/preview?start=1&autopaly=1" width="800" height="450" frameborder="0" allowfullscreen scrolling="no" seamless=""></iframe>
-          <div style="width:80px; height:80px; position:absolute; opacity:0;right:0px;top:0px;"></div>
+          <div style="width:120px; height:80px; position:absolute; opacity:1;right:0px;top:0px;">
+            <img src="/images/logo/logo_light.png" width="120"/>
+          </div>
         </div>
       </div>
     </main>
-
-    <footer>
-    </footer>
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <% include ./components/footer%>
   </body>
 </html>

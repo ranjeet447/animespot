@@ -12,17 +12,12 @@
       <div class="container">
         <%if(animeList){%>
           <%animeList.forEach(function(anime,i){%>
-            <a href="/anime/<%-anime.name.trim().replace(' ','-')%>"><%-anime.name%></a><br>
+            <a href="/anime/<%-anime.name.trim().replace(/ /g,'-')%>"><%-anime.name%></a><br>
           <%})%>
         <%}%>
       </div>
     </main>
-    <footer>
-
-    </footer>
-
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <% include ./components/footer%>
 
   </body>
 </html>

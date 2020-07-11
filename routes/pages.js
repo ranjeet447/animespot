@@ -19,9 +19,9 @@ router.get('/',(req,res)=>{
 });
 
 router.get('/anime/:name',(req,res)=>{
-  let name = req.params.name.trim().replace('-',' ');;
-  Anime.find({name},function(err,foundAnime){
-    // console.log(foundAnime);
+  let name = req.params.name.trim().replace(/-/g,' ');
+  Anime.findOne({name},function(err,foundAnime){
+    let anime = foundAnime?foundAnime.name:`${name} : No data Found`
     if (err) {
       throw err;
     }else{
@@ -29,7 +29,25 @@ router.get('/anime/:name',(req,res)=>{
         // console.log(foundEpisodes);
         if(err) throw err;
         else{
-          res.render('anime',{anime:foundAnime,episodes:foundEpisodes});
+          res.render('anime',{anime,episodes:foundEpisodes});
+        }
+      });
+    }
+  });
+});
+router.get('/search/anime',(req,res)=>{
+  let name = req.query.name.trim();
+
+  Anime.findOne({name},function(err,foundAnime){
+    let anime = foundAnime?foundAnime.name:`${name} : No data Found`
+    if (err) {
+      throw err;
+    }else{
+      Episode.find({anime:name},null,{sort:{'_id': -1}},function(err,foundEpisodes){
+        // console.log(foundEpisodes);
+        if(err) throw err;
+        else{
+          res.render('anime',{anime,episodes:foundEpisodes});
         }
       });
     }
@@ -56,9 +74,9 @@ router.get('/anime/:name',(req,res)=>{
 //   });
 // }
 router.get('/anime/play/:anime/:season/:episode',(req,res)=>{
-  let name = req.params.anime.trim().replace('-',' ');
-  let season = req.params.season.trim().replace('-',' ');
-  let eNo=req.params.episode.trim().replace('-',' ');
+  let name = req.params.anime.trim().replace(/-/g,' ');
+  let season = req.params.season.trim().replace(/-/g,' ');
+  let eNo=req.params.episode.trim().replace(/-/g,' ');
 
   Episode.findOne({anime:name,seasonNo:season,episodeNo:eNo},function(err,foundEpisode){
     // console.log(foundEpisode);
