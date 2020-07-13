@@ -1,32 +1,58 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="/">AnimeSpot</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #000;">
+  <div class="container">
+    <a class="navbar-brand" href="/">AnimeSpot</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/">anime list</a>
-      </li>
-      <!-- <li class="nav-item dropdown">
+      <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
+          Genre
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="max-height: 200px !important;overflow-y: scroll;">
+          <a class="dropdown-item" href="/genre/action">Action</a>
+          <a class="dropdown-item" href="/genre/Comedy">Adventure</a>
+          <a class="dropdown-item" href="/genre/Comedy">Comedy</a>
+          <a class="dropdown-item" href="/genre/Drama">Drama</a>
+          <a class="dropdown-item" href="/genre/Fantasy">Fantasy</a>
+          <a class="dropdown-item" href="/genre/Game">Game</a>
+          <a class="dropdown-item" href="/genre/Historical">Historical</a>
+          <a class="dropdown-item" href="/genre/Magic">Magic</a>
+          <a class="dropdown-item" href="/genre/Martial Arts">Martial Arts</a>
+          <a class="dropdown-item" href="/genre/Mystery">Mystery</a>
+          <a class="dropdown-item" href="/genre/Psychological">Psychological</a>
+          <a class="dropdown-item" href="/genre/Sci-Fi">Sci-Fi</a>
+          <a class="dropdown-item" href="/genre/Slice of Life">Slice of Life</a>
+          <a class="dropdown-item" href="/genre/Space">Space</a>
+          <a class="dropdown-item" href="/genre/Special">Special</a>
+          <a class="dropdown-item" href="/genre/Sports">Sports</a>
+          <a class="dropdown-item" href="/genre/Super-Powe">Super Power</a>
+          <a class="dropdown-item" href="/genre/Supernatural">Supernatural</a>
+          <a class="dropdown-item" href="/genre/Thriller">Thriller</a>
+          <a class="dropdown-item" href="/genre/Vampire">Vampire</a>
         </div>
-      </li> -->
+      </li>
+                           
+
+      <li class="nav-item">
+        <a class="nav-link" href="/latest">Latest</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/ongoing">Ongoing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/completed">Completed</a>
+      </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" action="/search/anime">
       <input class="form-control mr-sm-2 typeahead" name="name" id="search" type="search" placeholder="Search" aria-label="Search"required autocomplete="off">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
+  </div>
   </div>
 </nav>

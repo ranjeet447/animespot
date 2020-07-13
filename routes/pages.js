@@ -21,17 +21,33 @@ router.get('/',(req,res)=>{
 router.get('/anime/:name',(req,res)=>{
   let name = req.params.name.trim().replace(/-/g,' ');
   Anime.findOne({name},function(err,foundAnime){
-    let anime = foundAnime?foundAnime.name:`${name} : No data Found`
+    let anime = foundAnime?foundAnime:`${name} : No data Found`
     if (err) {
       throw err;
     }else{
-      Episode.find({anime:name},null,{sort:{'_id': -1}},function(err,foundEpisodes){
-        // console.log(foundEpisodes);
-        if(err) throw err;
-        else{
-          res.render('anime',{anime,episodes:foundEpisodes});
-        }
-      });
+      Episode.aggregate([
+        {$match:{anime:name}},
+        {$project:{anime:1,seasonNo:1,episodeNo:1,name:1,vid:1}},
+        {
+          $group:{
+            _id:"$seasonNo",
+            episodes:{
+              $push: "$$ROOT"
+          },
+            count: { $sum:1 }
+          }
+        },
+        {
+          $project:{
+            season:"$_id",
+            count:"$count",
+            episodes:"$episodes",
+          }
+        },
+        {$sort:{season:-1}},
+      ]).then(seasons=>{
+        res.render('anime',{anime,seasons});
+      })
     }
   });
 });
@@ -39,7 +55,7 @@ router.get('/search/anime',(req,res)=>{
   let name = req.query.name.trim();
 
   Anime.findOne({name},function(err,foundAnime){
-    let anime = foundAnime?foundAnime.name:`${name} : No data Found`
+    let anime = foundAnime?foundAnime:`${name} : No data Found`
     if (err) {
       throw err;
     }else{

@@ -42,6 +42,9 @@ app.use('/api',Apis);
 app.get("/*", function(req, res){
     res.render("404");
 });
+app.get("/*/*", function(req, res){
+    res.render("404");
+});
 
 var port = process.env.PORT || 3000;
 app.listen(port,()=>{

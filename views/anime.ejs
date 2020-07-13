@@ -11,29 +11,72 @@
   </header>
 
   <main>
-    <div class="container">
-      <%=anime%><br>
-      <%episodes.forEach(function(e,i){%>
-      <a
-        href="/anime/play/<%-e.anime.trim().replace(/ /g,'-')%>/<%-e.seasonNo.trim().replace(/ /g,'-')%>/<%-e.episodeNo.trim().replace(/ /g,'-')%>">Season
-        <%-e.seasonNo%> Episode <%-e.episodeNo%> <%-e.name%></a><br>
-      <%})%>
-    </div>
+    <section class="py-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9">
+            <div class="text-center">
+              <h4><%=anime.name%></h4>
+              <img class="img-responsive" src="https://drive.google.com/thumbnail?id=<%-anime.image%>" alt="image">
+              <p><%-anime.description%></p>
+            </div>
+            <!-- episodes -->
+            <div>
+              <%seasons.forEach(function(season,i){%>
+                <div class="accordion" id="accordionExample">
+                  <div class="card" style="border-radius: 0;">
+                    <div class="" style="background-color:#e4e4e4;">
+                      <h2 class="mb-0">
+                        <button class="btn btn-link text-dark" type="button" data-toggle="collapse"
+                          data-target="#collapse<%=season.season%>" aria-expanded="true"
+                          aria-controls="collapse<%=season.season%>">
+                          <div><span class="h6">Season : <%=season.season%> </span>  <span style="float: right;"> (<%-season.count%> Episodes)</span> </div>
+                         
+                        </button>
+                      </h2>
+                    </div>
+        
+                    <div id="collapse<%=season.season%>" class="collapse" aria-labelledby="heading<%=season.season%>" style="background-color: #000;color: #fff;">
+                      <div class="card-body">
+                        <%season.episodes.forEach(function(e,i){%>
+                        <a
+                          href="/anime/play/<%-e.anime.trim().replace(/ /g,'-')%>/<%-e.seasonNo.trim().replace(/ /g,'-')%>/<%-e.episodeNo.trim().replace(/ /g,'-')%>">Season
+                          <%-e.seasonNo%> Episode <%-e.episodeNo%> <%-e.name%></a><br>
+                        <%})%>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <%})%>
+            </div>
+          </div>
+
+          <!-- sidebar -->
+          <div class="col-md-3">
+
+          </div>
+        </div>
+        <br>
+       
+      </div>
+    </section>
   </main>
 
   <!-- adstarget ad s-->
   <div class="adflexbox" id="bfc0fba33f986c2b850c94e22ad858023"></div>
-<script>
-    (function(d, w) {
-        if (!w.adflex) {
-            var s = d.createElement("script");
-            s.type = "text/javascript";
-            s.src = "//portal.adstargets.com/loader.js";
-            d.getElementsByTagName('head')[0].appendChild(s);
-            w.adflex = {host: '//portal.adstargets.com'};
-        }
+  <script>
+    (function (d, w) {
+      if (!w.adflex) {
+        var s = d.createElement("script");
+        s.type = "text/javascript";
+        s.src = "//portal.adstargets.com/loader.js";
+        d.getElementsByTagName('head')[0].appendChild(s);
+        w.adflex = {
+          host: '//portal.adstargets.com'
+        };
+      }
     })(document, window);
-</script>
+  </script>
   <% include ./components/footer%>
   <!-- <script src="https://www.google.com/recaptcha/api.js?render=6Lcy044UAAAAADC8Js9prdLvjr_6Xrg-apcZzqtQ"></script> -->
   <script>
