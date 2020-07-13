@@ -13,6 +13,7 @@ var AnimeSchema = mongoose.Schema({
       type: Boolean,
     },
     lastEpisode:{type: Date, default: Date.now},
+    image:{type:String},
     seasons:[
       {
         number:{type:String},

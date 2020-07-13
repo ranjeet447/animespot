@@ -1,23 +1,90 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <% include ./components/header%>
-  </head>
-  <body>
-    <header>
-      <% include ./components/navbar%>
-    </header>
 
-    <main>
+<head>
+  <% include ./components/header%>
+</head>
+
+<body>
+  <header>
+    <% include ./components/navbar%>
+  </header>
+
+  <main>
+    <section class="section py-4">
       <div class="container">
-        <%if(animeList){%>
-          <%animeList.forEach(function(anime,i){%>
-            <a href="/anime/<%-anime.name.trim().replace(/ /g,'-')%>"><%-anime.name%></a><br>
-          <%})%>
-        <%}%>
+        <div class="row">
+          <div class="col-md-9">
+            <div class="row">
+              <%if(animeList){%>
+              <%animeList.forEach(function(anime,i){%>
+              <div class="col-md-4">
+                <div class="card border-0 my-2">
+                  <img class="card-img-top" src="https://drive.google.com/thumbnail?id=<%-anime.image%>" alt="image"
+                    style="width:100%">
+                  <div class="card-body" style="background-color: #e4e4e4;">
+                    <a href="/anime/<%-anime.name.trim().replace(/ /g,'-')%>">
+                      <h6 class="card-text text-dark"><%-anime.name%></h6>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <%})%>
+              <%}%>
+            </div>
+          </div>
+          <!-- sidebar -->
+          <div class="col-md-3">
+            <div class="card  border-0">
+              <div class="card-header">
+                <h6 class="title">Ongoing</h6>
+              </div>
+              <div class="card-body" style="max-height: 200px !important;overflow-y: scroll;">
+                <%if(animeList){%>
+                  <%animeList.forEach(function(anime,i){%>
+                    <%if(anime.ongoing==true){%>
+                      <a href="/anime/<%-anime.name.trim().replace(/ /g,'-')%>"><%-anime.name%></a><br/>
+                    <%}%>
+                  <%})%>
+                <%}%>
+              </div>
+            </div>
+            <br/>
+            <div class="card  border-0">
+              <div class="card-header">
+                <h6 class="title">Finished</h6>
+              </div>
+              <div class="card-body" style="max-height: 200px !important;overflow-y: scroll;">
+                <%if(animeList){%>
+                  <%animeList.forEach(function(anime,i){%>
+                    <%if(anime.ongoing==false){%>
+                      <a href="/anime/<%-anime.name.trim().replace(/ /g,'-')%>"><%-anime.name%></a><br/>
+                    <%}%>
+                  <%})%>
+                <%}%>
+              </div>
+            </div>
+          </div>
+        </div>
+        
       </div>
+     </section>
     </main>
+    <!-- adstarget ad s-->
+  <div class="adflexbox" id="bfc0fba33f986c2b850c94e22ad858023"></div>
+  <script>
+      (function(d, w) {
+          if (!w.adflex) {
+              var s = d.createElement("script");
+              s.type = "text/javascript";
+              s.src = "//portal.adstargets.com/loader.js";
+              d.getElementsByTagName('head')[0].appendChild(s);
+              w.adflex = {host: '//portal.adstargets.com'};
+          }
+      })(document, window);
+  </script>
     <% include ./components/footer%>
 
-  </body>
+</body>
+
 </html>

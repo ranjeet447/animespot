@@ -7,7 +7,7 @@ const Anime = require('../db/models/anime');
 const Episode = require('../db/models/episode');
 
 router.get('/',(req,res)=>{
-  Anime.find({},{name:1,},function(err,foundData){
+  Anime.find({},{name:1,image:1,ongoing:1},function(err,foundData){
     if (err) {
       throw err;
     }else{

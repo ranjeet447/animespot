@@ -49,6 +49,7 @@ router.post('/addAnime', isAdmin, (req, res) => {
   // console.log(req.body);
   let anime = new Anime({
     name: req.body.name.trim(),
+    image:req.body.image.trim(),
     description: req.body.description.trim(),
     genre: req.body.genre,
     ongoing: req.body.ongoing
@@ -66,6 +67,7 @@ router.post('/editAnime/:id', isAdmin, (req, res) => {
   let id = req.params.id;
   let anime = {
     name: req.body.name.trim(),
+    image:req.body.image.trim(),
     description: req.body.description.trim(),
     genre: req.body.genre,
     ongoing: req.body.ongoing
