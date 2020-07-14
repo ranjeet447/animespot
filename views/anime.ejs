@@ -27,21 +27,22 @@
                   <div class="card" style="border-radius: 0;">
                     <div class="" style="background-color:#e4e4e4;">
                       <h2 class="mb-0">
-                        <button class="btn btn-link text-dark" type="button" data-toggle="collapse"
+                        <div class="btn btn-link text-dark justify-content-between" type="button" data-toggle="collapse"
                           data-target="#collapse<%=season.season%>" aria-expanded="true"
                           aria-controls="collapse<%=season.season%>">
-                          <div><span class="h6">Season : <%=season.season%> </span>  <span style="float: right;"> (<%-season.count%> Episodes)</span> </div>
+                          <div><span class="h6">Season : <%=season.season%> </span>  <span> (<%-season.count%> Episodes)</span> </div>
                          
-                        </button>
+                      </div>
                       </h2>
                     </div>
         
                     <div id="collapse<%=season.season%>" class="collapse" aria-labelledby="heading<%=season.season%>" style="background-color: #000;color: #fff;">
                       <div class="card-body">
                         <%season.episodes.forEach(function(e,i){%>
-                        <a
-                          href="/anime/play/<%-e.anime.trim().replace(/ /g,'-')%>/<%-e.seasonNo.trim().replace(/ /g,'-')%>/<%-e.episodeNo.trim().replace(/ /g,'-')%>">Season
-                          <%-e.seasonNo%> Episode <%-e.episodeNo%> <%-e.name%></a><br>
+                        <a href="/anime/play/<%-e.anime.trim().replace(/ /g,'-')%>/<%-encrypt(e.seasonNo.trim().replace(/ /g,'-'))%>/<%-encrypt(e.episodeNo.trim().replace(/ /g,'-'))%>">
+                          Episode <%-e.episodeNo%> <%-e.name%>
+                        </a>
+                        <br>
                         <%})%>
                       </div>
                     </div>

@@ -16,20 +16,24 @@
         <div class="row">
           <div class="col-md-9">
             <div class="row">
-              <%if(animeList){%>
-              <%animeList.forEach(function(anime,i){%>
-              <div class="col-md-4">
-                <div class="card border-0 my-2">
-                  <img class="card-img-top"  src="https://drive.google.com/thumbnail?id=<%-anime.image%>" alt="image"
-                    style="width:100%;border-radius:0">
-                  <div class="card-body" style="background-color: #e4e4e4;">
-                    <a href="/anime/<%-anime.name.trim().replace(/ /g,'-')%>">
-                      <h6 class="card-text text-dark"><%-anime.name%></h6>
+              <%if(animeList && animeList.length>0){%>
+                <%animeList.forEach(function(anime,i){%>
+                <div class="col-md-4">
+                  <div class="card border-0 my-2">
+                    <a class="zoom-in" href="/anime/<%-anime.name.trim().replace(/ /g,'-')%>">
+                      <img class="card-img-top"  src="https://drive.google.com/thumbnail?id=<%-anime.image%>" alt="image"
+                      style="width:100%;border-radius:0">
                     </a>
+                    <div class="card-body" style="background-color: #e4e4e4;">
+                      <a href="/anime/<%-anime.name.trim().replace(/ /g,'-')%>">
+                        <h6 class="card-text text-dark"><%-anime.name%></h6><small><%-anime.genre%></small>
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <%})%>
+                <%})%>
+              <%}else{%>
+                  <p>No data Found</p>
               <%}%>
             </div>
           </div>

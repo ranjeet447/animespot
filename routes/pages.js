@@ -6,8 +6,35 @@ const https = require('https');
 const Anime = require('../db/models/anime');
 const Episode = require('../db/models/episode');
 
+const encrypt = require('../utils/encryption').encrypt;
+const decrypt = require('../utils/encryption').decrypt;
+
 router.get('/',(req,res)=>{
   Anime.find({},{name:1,image:1,ongoing:1},function(err,foundData){
+    if (err) {
+      throw err;
+    }else{
+        res.render('index',{animeList:foundData});
+        // console.log(foundData);
+    }
+  });
+  // res.render('index');
+});
+router.get('/latest',(req,res)=>{
+  Anime.find({},{name:1,image:1,ongoing:1},{$sort:{_id:-1}},function(err,foundData){
+    if (err) {
+      throw err;
+    }else{
+        res.render('index',{animeList:foundData});
+        // console.log(foundData);
+    }
+  });
+  // res.render('index');
+});
+router.get('/genre/:genre',(req,res)=>{
+  let genre=req.params.genre;
+  genre=new RegExp(genre,'ig')
+  Anime.find({genre:genre},{name:1,image:1,ongoing:1,genre:1},function(err,foundData){
     if (err) {
       throw err;
     }else{
@@ -21,7 +48,7 @@ router.get('/',(req,res)=>{
 router.get('/anime/:name',(req,res)=>{
   let name = req.params.name.trim().replace(/-/g,' ');
   Anime.findOne({name},function(err,foundAnime){
-    let anime = foundAnime?foundAnime:`${name} : No data Found`
+    let anime = foundAnime?foundAnime:{name:`${name} : No data Found`}
     if (err) {
       throw err;
     }else{
@@ -46,26 +73,41 @@ router.get('/anime/:name',(req,res)=>{
         },
         {$sort:{season:-1}},
       ]).then(seasons=>{
-        res.render('anime',{anime,seasons});
+        res.render('anime',{anime,seasons,encrypt});
       })
     }
   });
 });
 router.get('/search/anime',(req,res)=>{
   let name = req.query.name.trim();
-
-  Anime.findOne({name},function(err,foundAnime){
-    let anime = foundAnime?foundAnime:`${name} : No data Found`
+Anime.findOne({name},function(err,foundAnime){
+    let anime = foundAnime?foundAnime:{name:`${name} : No data Found`}
     if (err) {
       throw err;
     }else{
-      Episode.find({anime:name},null,{sort:{'_id': -1}},function(err,foundEpisodes){
-        // console.log(foundEpisodes);
-        if(err) throw err;
-        else{
-          res.render('anime',{anime,episodes:foundEpisodes});
-        }
-      });
+      Episode.aggregate([
+        {$match:{anime:name}},
+        {$project:{anime:1,seasonNo:1,episodeNo:1,name:1,vid:1}},
+        {
+          $group:{
+            _id:"$seasonNo",
+            episodes:{
+              $push: "$$ROOT"
+          },
+            count: { $sum:1 }
+          }
+        },
+        {
+          $project:{
+            season:"$_id",
+            count:"$count",
+            episodes:"$episodes",
+          }
+        },
+        {$sort:{season:-1}},
+      ]).then(seasons=>{
+        res.render('anime',{anime,seasons,encrypt});
+      })
     }
   });
 });
@@ -89,16 +131,16 @@ router.get('/search/anime',(req,res)=>{
 //       });
 //   });
 // }
-router.get('/anime/play/:anime/:season/:episode',(req,res)=>{
+router.get('/anime/play/:anime/:season/:episode',async (req,res)=>{
   let name = req.params.anime.trim().replace(/-/g,' ');
-  let season = req.params.season.trim().replace(/-/g,' ');
-  let eNo=req.params.episode.trim().replace(/-/g,' ');
-
+  let season = decrypt(req.params.season.trim().replace(/-/g,' '));
+  let eNo = decrypt(req.params.episode.trim().replace(/-/g,' '));
+  let episodeCount= await Episode.find({anime:name,seasonNo:season}).countDocuments();
   Episode.findOne({anime:name,seasonNo:season,episodeNo:eNo},function(err,foundEpisode){
     // console.log(foundEpisode);
     if(err) throw err;
     else{
-      res.render('playAnime',{episode:foundEpisode});
+      res.render('playAnime',{episode:foundEpisode,episodeCount,encrypt});
     }
   });
   // verifyRecaptcha(req.body["recaptcha"], function(success) {
@@ -108,6 +150,9 @@ router.get('/anime/play/:anime/:season/:episode',(req,res)=>{
   //       res.redirect(`/`)
   //     }
   // });
+});
+router.get("/bug-report", function(req, res){
+  res.render("bugReport");
 });
 router.get("/demo", function(req, res){
     res.render("demo");
