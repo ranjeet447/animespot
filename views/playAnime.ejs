@@ -14,19 +14,19 @@
 
   <main>
     <div class="container-fluid">
-      <div class="row">
+      <div class="row py-4">
         <div class="col-md-3">
 
         </div>
         <div class="col-md-6">
-          <h6><%-episode.anime%></h6>
+          <h6 class="btn text-white w-100 font-weight-bold" style="background-image: linear-gradient(to top, #CA7C0D, #F3CCC4);"><%-episode.anime%></h6>
           <div>
             <div class="dropdown">
               Season: <%-episode.seasonNo%>
               <button class=" dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                Episode: <%= episode.episodeNo %> 
               </button>
-              <div class="dropdown-menu overflow-auto" aria-labelledby="dropdownMenuButton" style="max-height: 300px;">
+              <div class="dropdown-menu overflow-auto bg-dark text-orange" aria-labelledby="dropdownMenuButton" style="max-height: 300px;">
                 <% for(var i=1;i<=episodeCount;i++){%>
                   <a class="dropdown-item" href="/anime/play/<%-episode.anime.trim().replace(/ /g,'-')%>/<%-encrypt(episode.seasonNo)%>/<%-encrypt(i)%>">Episode: <%-i%></a>
                 <%} %>
@@ -35,7 +35,7 @@
             
           </div>
 
-          <div class="embed-responsive embed-responsive-16by9" style="position:relative;background-color:#e4e4e4;border: solid 1px #e2e2e2;">
+          <div class="embed-responsive embed-responsive-16by9" style="position:relative;background-color:#e4e4e4;">
             <iframe src="https://drive.google.com/file/d/<%-episode.vid.trim()%>/preview?start=1&autopaly=1" width="800"
               height="450" frameborder="0" allowfullscreen scrolling="no" seamless=""></iframe>
             <div style="width:120px; height:80px; position:absolute; opacity:1;right:0px;top:0px;">
@@ -44,10 +44,10 @@
           </div>
           <div class="d-flex justify-content-between py-2">
             <%if(episode.episodeNo>1){%>
-              <a href="/anime/play/<%-episode.anime.trim().replace(/ /g,'-')%>/<%-encrypt(episode.seasonNo)%>/<%-encrypt(episode.episodeNo-1)%>" disabled>Prev</a>
+              <a style="color: #CA7C0D;" href="/anime/play/<%-episode.anime.trim().replace(/ /g,'-')%>/<%-encrypt(episode.seasonNo)%>/<%-encrypt(episode.episodeNo-1)%>" disabled>Previous</a>
             <%}%>
             <%if(episode.episodeNo<episodeCount){%>
-            <a href="/anime/play/<%-episode.anime.trim().replace(/ /g,'-')%>/<%-encrypt(episode.seasonNo)%>/<%-encrypt(Number(episode.episodeNo)+1)%>">Next</a>
+            <a style="color: #CA7C0D;" href="/anime/play/<%-episode.anime.trim().replace(/ /g,'-')%>/<%-encrypt(episode.seasonNo)%>/<%-encrypt(Number(episode.episodeNo)+1)%>">Next</a>
             <%}%>
           </div>
         </div>

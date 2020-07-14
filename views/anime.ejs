@@ -14,32 +14,32 @@
     <section class="py-4">
       <div class="container">
         <div class="row">
-          <div class="col-md-9">
+          <div class="col-md-9 pb-4">
             <div class="text-center">
-              <h4><%=anime.name%></h4>
+              <div class="card card-header rounded text-white w-100 font-weight-bolder" style="background-image: linear-gradient(to top, #CA7C0D, #F3CCC4);"><%=anime.name%></div><br>
               <img class="img-responsive" src="https://drive.google.com/thumbnail?id=<%-anime.image%>" alt="image">
               <p><%-anime.description%></p>
             </div>
             <!-- episodes -->
             <div>
               <%seasons.forEach(function(season,i){%>
-                <div class="accordion" id="accordionExample">
-                  <div class="card" style="border-radius: 0;">
+                <div class="accordion" id="accordionSeasons">
+                  <div class="card border-bottom border-0" style="border-radius: 0;">
                     <div class="" style="background-color:#e4e4e4;">
-                      <h2 class="mb-0">
+                      <h2 class="mb-0" id="heading<%=season.season%>">
                         <div class="btn btn-link text-dark justify-content-between" type="button" data-toggle="collapse"
-                          data-target="#collapse<%=season.season%>" aria-expanded="true"
+                          data-target="#collapse<%=season.season%>" aria-expanded="false"
                           aria-controls="collapse<%=season.season%>">
-                          <div><span class="h6">Season : <%=season.season%> </span>  <span> (<%-season.count%> Episodes)</span> </div>
+                          <div class="d-block"><span class="h6">Season : <%=season.season%> </span>  <span> (<%-season.count%> Episodes)</span> </div>
                          
                       </div>
                       </h2>
                     </div>
         
-                    <div id="collapse<%=season.season%>" class="collapse" aria-labelledby="heading<%=season.season%>" style="background-color: #000;color: #fff;">
+                    <div id="collapse<%=season.season%>" class="collapse" aria-labelledby="heading<%=season.season%>" data-parent="#accordionSeasons" style="background-color: #000;color: #fff;">
                       <div class="card-body">
                         <%season.episodes.forEach(function(e,i){%>
-                        <a href="/anime/play/<%-e.anime.trim().replace(/ /g,'-')%>/<%-encrypt(e.seasonNo.trim().replace(/ /g,'-'))%>/<%-encrypt(e.episodeNo.trim().replace(/ /g,'-'))%>">
+                        <a class="text-orange" href="/anime/play/<%-e.anime.trim().replace(/ /g,'-')%>/<%-encrypt(e.seasonNo.trim().replace(/ /g,'-'))%>/<%-encrypt(e.episodeNo.trim().replace(/ /g,'-'))%>">
                           Episode <%-e.episodeNo%> <%-e.name%>
                         </a>
                         <br>
@@ -54,7 +54,33 @@
 
           <!-- sidebar -->
           <div class="col-md-3">
-
+            <div class="card border-0" style="border-radius:0">
+              <div class="card-header"  style="background-image: linear-gradient(to top, #CA7C0D, #F3CCC4);">
+                <h6 class="title text-dark">Search By Genre</h6>
+              </div>
+              <div class="card-body" style="background-color: #000;">
+                <div><a class="text-orange" href="/genre/action">Action</a></div>
+                <div><a class="text-orange" href="/genre/Comedy">Adventure</a></div>
+                <div><a class="text-orange" href="/genre/Comedy">Comedy</a></div>
+                <div><a class="text-orange" href="/genre/Drama">Drama</a></div>
+                <div><a class="text-orange" href="/genre/Fantasy">Fantasy</a></div>
+                <div><a class="text-orange" href="/genre/Game">Game</a></div>
+                <div><a class="text-orange" href="/genre/Historical">Historical</a></div>
+                <div><a class="text-orange" href="/genre/Magic">Magic</a></div>
+                <div><a class="text-orange" href="/genre/Martial Arts">Martial Arts</a></div>
+                <div><a class="text-orange" href="/genre/Mystery">Mystery</a></div>
+                <div><a class="text-orange" href="/genre/Psychological">Psychological</a></div>
+                <div><a class="text-orange" href="/genre/Sci-Fi">Sci-Fi</a></div>
+                <div><a class="text-orange" href="/genre/Slice of Life">Slice of Life</a></div>
+                <div><a class="text-orange" href="/genre/Space">Space</a></div>
+                <div><a class="text-orange" href="/genre/Special">Special</a></div>
+                <div><a class="text-orange" href="/genre/Sports">Sports</a></div>
+                <div><a class="text-orange" href="/genre/Super-Powe">Super Power</a></div>
+                <div><a class="text-orange" href="/genre/Supernatural">Supernatural</a></div>
+                <div><a class="text-orange" href="/genre/Thriller">Thriller</a></div>
+                <div><a class="text-orange" href="/genre/Vampire">Vampire</a></div>
+              </div>
+            </div>
           </div>
         </div>
         <br>

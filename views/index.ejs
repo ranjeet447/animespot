@@ -9,64 +9,79 @@
   <header>
     <% include ./components/navbar%>
   </header>
-
-  <main>
+  <main style="background-image: url(/images/bg/bg1.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;background-attachment: fixed;">
     <section class="section py-4">
       <div class="container">
         <div class="row">
           <div class="col-md-9">
             <div class="row">
+              <div class="col-12">
+                <div class="card card-header text-dark border-0" style="background-image: linear-gradient(to top, #CA7C0D, #F3CCC4);"><h5>Anime</h5></div>
+              </div>
+            </div>
+            <div class="row">
+              <%let ongoing=[];let finished=[]%>
               <%if(animeList && animeList.length>0){%>
-                <%animeList.forEach(function(anime,i){%>
-                <div class="col-md-4">
-                  <div class="card border-0 my-2">
-                    <a class="zoom-in" href="/anime/<%-anime.name.trim().replace(/ /g,'-')%>">
-                      <img class="card-img-top"  src="https://drive.google.com/thumbnail?id=<%-anime.image%>" alt="image"
+              <%animeList.forEach(function(anime,i){%>
+              <% (anime.ongoing)?ongoing.push(anime):finished.push(anime) %>
+              <div class="col-md-4">
+                <div class="card border-0 my-2">
+                  <a class="zoom-in" href="/anime/<%-anime.name.trim().replace(/ /g,'-')%>">
+                    <img class="card-img-top" src="https://drive.google.com/thumbnail?id=<%-anime.image%>" alt="image"
                       style="width:100%;border-radius:0">
+                  </a>
+                  <div class="card-body py-1" style="background-color: #e4e4e4;">
+                    <a href="/anime/<%-anime.name.trim().replace(/ /g,'-')%>">
+                      <h5 class="card-text text-dark"><%-anime.name%></h5><small><%-anime.genre%></small>
                     </a>
-                    <div class="card-body" style="background-color: #e4e4e4;">
-                      <a href="/anime/<%-anime.name.trim().replace(/ /g,'-')%>">
-                        <h6 class="card-text text-dark"><%-anime.name%></h6><small><%-anime.genre%></small>
-                      </a>
-                    </div>
                   </div>
                 </div>
-                <%})%>
+              </div>
+              <%})%>
               <%}else{%>
-                  <p>No data Found</p>
+              <div class="col">
+                <p>No data Found</p>
+              </div>
               <%}%>
             </div>
           </div>
           <!-- sidebar -->
           <div class="col-md-3">
-            <section style="position: -webkit-sticky; position: sticky;top: 0;">
+            <section >
               <div class="card border-0" style="border-radius:0">
-                <div class="card-header">
+                <div class="card-header" style="background-image: linear-gradient(to top, #CA7C0D, #F3CCC4);">
                   <h6 class="text-dark">Ongoing</h6>
                 </div>
-                <div class="card-body" style="max-height: 200px !important;overflow-y: scroll;">
-                  <%if(animeList){%>
-                    <%animeList.forEach(function(anime,i){%>
-                      <%if(anime.ongoing==true){%>
-                        <a href="/anime/<%-anime.name.trim().replace(/ /g,'-')%>"><%-anime.name%></a><br/>
-                      <%}%>
+                <div class="card-body" style="max-height: 200px !important;overflow-y: scroll;background-color: #000;">
+                  <%if(ongoing.length>0){%>
+              <%ongoing.forEach(function(anime,i){%>
+              <%if(anime.ongoing==true){%>
+              <a class="text-orange" href="/anime/<%-anime.name.trim().replace(/ /g,'-')%>"><%-anime.name%></a><br />
+              <%}%>
                     <%})%>
-                  <%}%>
+              <%}else{%>
+              <p class="text-orange">No data found</p>
+              <%}%>
                 </div>
               </div>
               <br/>
               <div class="card border-0" style="border-radius:0">
-                <div class="card-header">
+                <div class="card-header"  style="background-image: linear-gradient(to top, #CA7C0D, #F3CCC4);">
                   <h6 class="title text-dark">Finished</h6>
                 </div>
-                <div class="card-body" style="max-height: 200px !important;overflow-y: scroll;">
-                  <%if(animeList){%>
-                    <%animeList.forEach(function(anime,i){%>
-                      <%if(anime.ongoing==false){%>
-                        <a href="/anime/<%-anime.name.trim().replace(/ /g,'-')%>"><%-anime.name%></a><br/>
-                      <%}%>
+                <div class="card-body" style="max-height: 200px !important;overflow-y: scroll; background-color: #000;">
+                  <%if(finished.length>0){%>
+              <%animeList.forEach(function(anime,i){%>
+              <%if(anime.ongoing==false){%>
+              <a class="text-orange" href="/anime/<%-anime.name.trim().replace(/ /g,'-')%>"><%-anime.name%></a><br />
+              <%}%>
                     <%})%>
-                  <%}%>
+              <%}else{%>
+              <p class="text-orange">No data found</p>
+              <%}%>
                 </div>
               </div>
             </section>

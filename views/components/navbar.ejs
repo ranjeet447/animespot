@@ -1,17 +1,38 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #000;">
-  <div class="container">
-    <a class="navbar-brand" href="/">AnimeSpot</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+<div style="position: sticky;top: 0;">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="/">AnimeSpot</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="fa fa-search"><i ></i></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="/ongoing">Ongoing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/completed">Completed</a>
+        </li> -->
+      </ul>
+      <form class="form-inline my-2 my-lg-0" action="/search/anime">
+        <div class="d-flex justify-content-between rounded-pill  w-100" style="background-color: #c4c4c4;color: #fff;">
+          <input class="mr-sm-2 typeahead rounded-pill border-0 pl-2" style="background-color: #c4c4c4;color: #fff;"  name="name" id="search" type="search" placeholder="Search" aria-label="Search"required autocomplete="off">
+          <button class="btn my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+        </div>
+      </form>
+    </div>
+    </div>
+  </nav>
+  
+  <nav class="navbar navbar-expand-lg navbar-dark"  style="background-color: #000;">
+    <div class="container">
+      <ul class="list-unstyled d-flex mr-auto">
+      <li class="nav-item active border-right text-uppercase">
+        <a class="nav-link text-white text-responsive" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <li class="nav-item dropdown border-right  text-uppercase active">
+        <a class="nav-link dropdown-toggle text-white text-responsive" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Genre
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="max-height: 200px !important;overflow-y: scroll;">
@@ -38,21 +59,15 @@
         </div>
       </li>
                            
-
-      <li class="nav-item">
-        <a class="nav-link" href="/latest">Latest</a>
+  
+      <li class="nav-item border-right text-uppercase active">
+        <a class="nav-link text-white text-responsive" href="/latest">Latest</a>
       </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link" href="/ongoing">Ongoing</a>
+      <li class="nav-item text-uppercase active">
+        <a class="nav-link text-white text-responsive" href="/bug-report">Report</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/completed">Completed</a>
-      </li> -->
     </ul>
-    <form class="form-inline my-2 my-lg-0" action="/search/anime">
-      <input class="form-control mr-sm-2 typeahead" name="name" id="search" type="search" placeholder="Search" aria-label="Search"required autocomplete="off">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-  </div>
-</nav>
+    </div>
+  </nav>
+  
+</div>
