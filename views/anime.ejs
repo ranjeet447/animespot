@@ -17,8 +17,11 @@
           <div class="col-md-9 pb-4">
             <div class="text-center">
               <div class="card card-header rounded text-white w-100 font-weight-bolder" style="background-image: linear-gradient(to top, #CA7C0D, #F3CCC4);"><%=anime.name%></div><br>
+              <% if(anime.image){%>
               <img class="img-responsive" src="https://drive.google.com/thumbnail?id=<%-anime.image%>" alt="image">
-              <div class="text-left">
+              <%} %> 
+              <% if(anime.genre){%>
+                <div class="text-left">
                  <small>Genres : <span class="text-orange"><%=anime.genre %> </span></small>
                 <br>
                 <small>Status  : <span class="text-orange"><%-(anime.ongoing)?'Ongoing':'Completed'%></span></small><br>
@@ -29,6 +32,7 @@
                   </div>
                 </div>
               </div>
+              <%} %> 
             </div>
             <!-- episodes -->
             <br>
@@ -41,7 +45,7 @@
                         <div type="button" data-toggle="collapse" data-target="#collapse<%=season.season%>" aria-expanded="false"
                           aria-controls="collapse<%=season.season%>">
                           <div class="text-dark p-2 d-flex justify-content-between ">
-                            <span class="h6">Season : <%=season.season%> </span>
+                            <span class="h6">Season : <%=season.season%> <%-anime.seasons[anime.seasons.findIndex((a)=>{return a.number==season.season})].name%> </span>
                             <span class="h6"> (<%-season.count%> Episodes)</span>
                           </div>
                         </div>

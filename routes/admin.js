@@ -177,21 +177,19 @@ router.post('/editEp/:anime/:sno/:sname/:eid', isAdmin, (req, res) => {
   });
 });
 
-// router.get('/update', async (req, res) => {
-//   Episode.find({}, { "vid": 1 }).then(async es => {
-//     es.forEach(function (doc,i) {
-//       doc.vid = doc.vid.trim();
-//       Episode.findOneAndUpdate(
-//         { "_id": doc._id },
-//         { "$set": { "vid": doc.vid } }, { new: true }
-//       ).then((e) => {
-//         console.log(i);
-//       });
-//     }).then(() => {
-//       res.send('done')
-//     })
-//   })
-// });
+router.get('/update', async (req, res) => {
+  Episode.find({anime:"Avatar"}, { "vid": 1 }).then(async es => {
+    es.forEach(function (doc,i) {
+      doc.anime = "Avatar: The Last Airbender"
+      Episode.findOneAndUpdate(
+        { "_id": doc._id },
+        { "$set": { "anime": doc.anime } }, { new: true }
+      ).then((e) => {
+        console.log(i);
+      });
+    })
+  })
+});
 
 
 module.exports = router;

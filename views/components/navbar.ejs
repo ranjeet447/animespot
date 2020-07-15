@@ -1,73 +1,82 @@
-<div style="">
+<div>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
       <a class="navbar-brand" href="/">AnimeSpot</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="fa fa-search"><i ></i></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto">
-        <!-- <li class="nav-item">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="fa fa-search"><i></i></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <!-- <li class="nav-item">
           <a class="nav-link" href="/ongoing">Ongoing</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/completed">Completed</a>
         </li> -->
-      </ul>
-      <form class="form-inline my-2 my-lg-0" action="/search/anime">
-        <div class="d-flex justify-content-between rounded-pill  w-100" style="background-color: #c4c4c4;color: #fff;">
-          <input class="mr-sm-2 typeahead rounded-pill border-0 pl-2" style="background-color: #c4c4c4;color: #fff;"  name="name" id="search" type="search" placeholder="Search" aria-label="Search"required autocomplete="off">
-          <button class="btn my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
-        </div>
-      </form>
-    </div>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" action="/search/anime">
+          <div class=" row rounded-pill  w-100" style="background-color: #c4c4c4;color: #000;">
+            <div class="col-10">
+              <input class="form-control border-none typeahead rounded-pill border-0 pl-2 h-100 w-100 pr-0 mr-0"
+                style="background-color: #c4c4c4;color: #000;" name="name" id="search" type="search"
+                placeholder="Search" aria-label="Search" required autocomplete="off">
+            </div>
+            <div class="col-2">
+              <button class="btn w-100 pl-0 py-2" type="submit"><i class="fa fa-search"></i></button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </nav>
-  
-  <nav class="navbar navbar-expand-lg navbar-dark"  style="background-color: #000;">
+
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000;">
     <div class="container">
       <ul class="list-unstyled d-flex mr-auto">
-      <li class="nav-item active border-right text-uppercase">
-        <a class="nav-link text-white text-responsive" href="/">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item dropdown border-right  text-uppercase active">
-        <a class="nav-link dropdown-toggle text-white text-responsive" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Genre
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="max-height: 200px !important;overflow-y: scroll;z-index: 999;">
-          <a class="dropdown-item" href="/genre/Action">Action</a>
-          <a class="dropdown-item" href="/genre/Comedy">Adventure</a>
-          <a class="dropdown-item" href="/genre/Comedy">Comedy</a>
-          <a class="dropdown-item" href="/genre/Drama">Drama</a>
-          <a class="dropdown-item" href="/genre/Fantasy">Fantasy</a>
-          <a class="dropdown-item" href="/genre/Game">Game</a>
-          <a class="dropdown-item" href="/genre/Historical">Historical</a>
-          <a class="dropdown-item" href="/genre/Magic">Magic</a>
-          <a class="dropdown-item" href="/genre/Martial Arts">Martial Arts</a>
-          <a class="dropdown-item" href="/genre/Mystery">Mystery</a>
-          <a class="dropdown-item" href="/genre/Psychological">Psychological</a>
-          <a class="dropdown-item" href="/genre/Sci-Fi">Sci-Fi</a>
-          <a class="dropdown-item" href="/genre/Slice of Life">Slice of Life</a>
-          <a class="dropdown-item" href="/genre/Space">Space</a>
-          <a class="dropdown-item" href="/genre/Special">Special</a>
-          <a class="dropdown-item" href="/genre/Sports">Sports</a>
-          <a class="dropdown-item" href="/genre/Super-Powe">Super Power</a>
-          <a class="dropdown-item" href="/genre/Supernatural">Supernatural</a>
-          <a class="dropdown-item" href="/genre/Thriller">Thriller</a>
-          <a class="dropdown-item" href="/genre/Vampire">Vampire</a>
-        </div>
-      </li>
-                           
-  
-      <li class="nav-item border-right text-uppercase active">
-        <a class="nav-link text-white text-responsive" href="/latest">Latest</a>
-      </li>
-      <li class="nav-item text-uppercase active">
-        <a class="nav-link text-white text-responsive" href="/bug-report">Report</a>
-      </li>
-    </ul>
+        <li class="nav-item active border-right text-uppercase">
+          <a class="nav-link text-white text-responsive" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown border-right  text-uppercase active">
+          <a class="nav-link dropdown-toggle text-white text-responsive" href="#" id="navbarDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Genre
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown"
+            style="max-height: 200px !important;overflow-y: scroll;z-index: 999;">
+            <a class="dropdown-item" href="/genre/Action">Action</a>
+            <a class="dropdown-item" href="/genre/Comedy">Adventure</a>
+            <a class="dropdown-item" href="/genre/Comedy">Comedy</a>
+            <a class="dropdown-item" href="/genre/Drama">Drama</a>
+            <a class="dropdown-item" href="/genre/Fantasy">Fantasy</a>
+            <a class="dropdown-item" href="/genre/Game">Game</a>
+            <a class="dropdown-item" href="/genre/Historical">Historical</a>
+            <a class="dropdown-item" href="/genre/Magic">Magic</a>
+            <a class="dropdown-item" href="/genre/Martial Arts">Martial Arts</a>
+            <a class="dropdown-item" href="/genre/Mystery">Mystery</a>
+            <a class="dropdown-item" href="/genre/Psychological">Psychological</a>
+            <a class="dropdown-item" href="/genre/Sci-Fi">Sci-Fi</a>
+            <a class="dropdown-item" href="/genre/Slice of Life">Slice of Life</a>
+            <a class="dropdown-item" href="/genre/Space">Space</a>
+            <a class="dropdown-item" href="/genre/Special">Special</a>
+            <a class="dropdown-item" href="/genre/Sports">Sports</a>
+            <a class="dropdown-item" href="/genre/Super-Powe">Super Power</a>
+            <a class="dropdown-item" href="/genre/Supernatural">Supernatural</a>
+            <a class="dropdown-item" href="/genre/Thriller">Thriller</a>
+            <a class="dropdown-item" href="/genre/Vampire">Vampire</a>
+          </div>
+        </li>
+
+
+        <li class="nav-item border-right text-uppercase active">
+          <a class="nav-link text-white text-responsive" href="/latest">Latest</a>
+        </li>
+        <li class="nav-item text-uppercase active">
+          <a class="nav-link text-white text-responsive" href="/bug-report">Report</a>
+        </li>
+      </ul>
     </div>
   </nav>
-  
+
 </div>
