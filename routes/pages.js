@@ -14,7 +14,7 @@ router.get('/',(req,res)=>{
     if (err) {
       throw err;
     }else{
-        res.render('index',{animeList:foundData});
+        res.render('index',{animeList:foundData,genre:''});
         // console.log(foundData);
     }
   });
@@ -25,7 +25,7 @@ router.get('/latest',(req,res)=>{
     if (err) {
       throw err;
     }else{
-        res.render('index',{animeList:foundData});
+        res.render('index',{animeList:foundData,genre:'Latest Anime'});
         // console.log(foundData);
     }
   });
@@ -33,12 +33,12 @@ router.get('/latest',(req,res)=>{
 });
 router.get('/genre/:genre',(req,res)=>{
   let genre=req.params.genre;
-  genre=new RegExp(genre,'ig')
-  Anime.find({genre:genre},{name:1,image:1,ongoing:1,genre:1},function(err,foundData){
+  genreRegex=new RegExp(genre,'ig')
+  Anime.find({genre:genreRegex},{name:1,image:1,ongoing:1,genre:1},function(err,foundData){
     if (err) {
       throw err;
     }else{
-        res.render('index',{animeList:foundData});
+        res.render('index',{animeList:foundData,genre});
         // console.log(foundData);
     }
   });
@@ -47,8 +47,9 @@ router.get('/genre/:genre',(req,res)=>{
 
 router.get('/anime/:name',(req,res)=>{
   let name = req.params.name.trim().replace(/-/g,' ');
-  Anime.findOne({name},function(err,foundAnime){
+  Anime.findOne({name},{},{lean:true},function(err,foundAnime){
     let anime = foundAnime?foundAnime:{name:`${name} : No data Found`}
+    // console.log(anime)
     if (err) {
       throw err;
     }else{
@@ -59,7 +60,7 @@ router.get('/anime/:name',(req,res)=>{
           $group:{
             _id:"$seasonNo",
             episodes:{
-              $push: "$$ROOT"
+              $push: "$$ROOT" 
           },
             count: { $sum:1 }
           }
@@ -135,12 +136,12 @@ router.get('/anime/play/:anime/:season/:episode',async (req,res)=>{
   let name = req.params.anime.trim().replace(/-/g,' ');
   let season = decrypt(req.params.season.trim().replace(/-/g,' '));
   let eNo = decrypt(req.params.episode.trim().replace(/-/g,' '));
-  let episodeCount= await Episode.find({anime:name,seasonNo:season}).countDocuments();
+  let episodes= await Episode.find({anime:name,seasonNo:season},{name:1,seasonNo:1,episodeNo:1})
   Episode.findOne({anime:name,seasonNo:season,episodeNo:eNo},function(err,foundEpisode){
     // console.log(foundEpisode);
     if(err) throw err;
     else{
-      res.render('playAnime',{episode:foundEpisode,episodeCount,encrypt});
+      res.render('playAnime',{episode:foundEpisode,episodes,encrypt});
     }
   });
   // verifyRecaptcha(req.body["recaptcha"], function(success) {

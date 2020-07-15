@@ -18,21 +18,33 @@
             <div class="text-center">
               <div class="card card-header rounded text-white w-100 font-weight-bolder" style="background-image: linear-gradient(to top, #CA7C0D, #F3CCC4);"><%=anime.name%></div><br>
               <img class="img-responsive" src="https://drive.google.com/thumbnail?id=<%-anime.image%>" alt="image">
-              <p><%-anime.description%></p>
+              <div class="text-left">
+                 <small>Genres : <span class="text-orange"><%=anime.genre %> </span></small>
+                <br>
+                <small>Status  : <span class="text-orange"><%-(anime.ongoing)?'Ongoing':'Completed'%></span></small><br>
+                <small>Summary :</small><br>
+                <div class="row">
+                  <div class="col-12">
+                    <pre class="text-white"><%-anime.description%></pre>
+                  </div>
+                </div>
+              </div>
             </div>
             <!-- episodes -->
+            <br>
             <div>
               <%seasons.forEach(function(season,i){%>
                 <div class="accordion" id="accordionSeasons">
-                  <div class="card border-bottom border-0" style="border-radius: 0;">
-                    <div class="" style="background-color:#e4e4e4;">
+                  <div class="card border-0" style="border-radius: 0;">
+                    <div class="border border-secondary" style="background-color:#e4e4e4;">
                       <h2 class="mb-0" id="heading<%=season.season%>">
-                        <div class="btn btn-link text-dark justify-content-between" type="button" data-toggle="collapse"
-                          data-target="#collapse<%=season.season%>" aria-expanded="false"
+                        <div type="button" data-toggle="collapse" data-target="#collapse<%=season.season%>" aria-expanded="false"
                           aria-controls="collapse<%=season.season%>">
-                          <div class="d-block"><span class="h6">Season : <%=season.season%> </span>  <span> (<%-season.count%> Episodes)</span> </div>
-                         
-                      </div>
+                          <div class="text-dark p-2 d-flex justify-content-between ">
+                            <span class="h6">Season : <%=season.season%> </span>
+                            <span class="h6"> (<%-season.count%> Episodes)</span>
+                          </div>
+                        </div>
                       </h2>
                     </div>
         
