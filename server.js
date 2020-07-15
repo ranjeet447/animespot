@@ -15,10 +15,10 @@ const Apis = require('./routes/api');
 
 
 var app  = express();
+app.use(compression());
 app.use(express.static(path.resolve(__dirname + "/assets")));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(compression());
 app.set("view engine", "ejs");
 app.disable('x-powered-by');
 app.use(flash());
@@ -31,6 +31,11 @@ app.use(session({
         expires: 60*60*1000
     }
 }));
+
+app.get('/*',function(req,res,next){
+    res.setHeader('Cache-Control', 'public, max-age=3600');
+    next(); 
+});
 
 app.use(pagesRoutes);
 app.use('/admin',adminRoutes);
