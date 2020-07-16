@@ -3,6 +3,8 @@ html,body{
   margin: 0;
   color: #fff;
   background: #222;
+  position: relative;
+  min-height: 100vh;
 }
 .zoom-in{
   overflow: hidden; 
