@@ -18,7 +18,11 @@
             <div class="text-center">
               <div class="card card-header rounded text-white w-100 font-weight-bolder" style="background-image: linear-gradient(to top, #CA7C0D, #F3CCC4);"><%=anime.name%></div><br>
               <% if(anime.image){%>
-              <img class="img-responsive" src="https://drive.google.com/thumbnail?id=<%-anime.image%>" alt="image">
+              <div class="row">
+                <div class="col">
+                  <img class="img-responsive" src="https://lh3.google.com/u/0/d/<%-anime.image%>=w915-h917-iv1" alt="image">
+                </div>
+              </div>
               <%} %> 
               <% if(anime.genre){%>
                 <div class="text-left">
