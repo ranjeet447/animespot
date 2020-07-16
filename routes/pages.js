@@ -56,6 +56,7 @@ router.get('/anime/:name',(req,res)=>{
       Episode.aggregate([
         {$match:{anime:name}},
         {$project:{anime:1,seasonNo:1,episodeNo:1,name:1,vid:1}},
+        {$sort:{seasonNo:-1}},
         {
           $group:{
             _id:"$seasonNo",

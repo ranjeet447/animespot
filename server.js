@@ -32,10 +32,6 @@ app.use(session({
     }
 }));
 
-app.get('/*',function(req,res,next){
-    res.setHeader('Cache-Control', 'public, max-age=3600');
-    next(); 
-});
 
 app.use(pagesRoutes);
 app.use('/admin',adminRoutes);
@@ -47,10 +43,6 @@ app.use('/api',Apis);
 app.get("/*", function(req, res){
     res.render("404");
 });
-app.get("/*/*", function(req, res){
-    res.render("404");
-});
-
 var port = process.env.PORT || 3000;
 app.listen(port,()=>{
   console.log(`sever up on port ${port}`)

@@ -82,11 +82,13 @@ router.post('/editAnime/:id', isAdmin, (req, res) => {
 
 router.get('/addS/:anime', isAdmin, (req, res) => {
   let name = req.params.anime;
+  console.log(name)
   Anime.find({ name }, function (err, foundData) {
     if (err) {
+      console.log(err)
       throw err;
     } else {
-      // console.log(foundData);
+      console.log(foundData);
       res.render('addS', { data: foundData });
     }
   });
@@ -130,7 +132,7 @@ router.get('/addEp/:anime/:sno/:sname', isAdmin, (req, res) => {
     sno: req.params.sno,
     sname: req.params.sname
   }
-  Episode.find({ anime: req.params.anime, seasonNo: req.params.sno }, null, { sort: { '_id': -1 } }, function (err, found) {
+  Episode.find({ anime: req.params.anime, seasonNo: req.params.sno }, null, { sort: { seasonNo: -1 } }, function (err, found) {
     // console.log(found);
     if (err) throw err;
     else {
@@ -177,19 +179,19 @@ router.post('/editEp/:anime/:sno/:sname/:eid', isAdmin, (req, res) => {
   });
 });
 
-router.get('/update', async (req, res) => {
-  Episode.find({anime:"Avatar"}, { "vid": 1 }).then(async es => {
-    es.forEach(function (doc,i) {
-      doc.anime = "Avatar: The Last Airbender"
-      Episode.findOneAndUpdate(
-        { "_id": doc._id },
-        { "$set": { "anime": doc.anime } }, { new: true }
-      ).then((e) => {
-        console.log(i);
-      });
-    })
-  })
-});
+// router.get('/update', async (req, res) => {
+//   Episode.find({anime:" Naruto: Shippuden"}, { "anime": 1 }).then(async es => {
+//     es.forEach(function (doc,i) {
+//       doc.anime = "Naruto: Shippuden"
+//       Episode.findOneAndUpdate(
+//         { "_id": doc._id },
+//         { "$set": { "anime": doc.anime } }, { new: true }
+//       ).then((e) => {
+//         console.log(i);
+//       });
+//     })
+//   })
+// });
 
 
 module.exports = router;
