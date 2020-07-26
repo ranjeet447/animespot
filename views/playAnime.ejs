@@ -16,18 +16,9 @@
     <div class="container-fluid">
       <div class="row py-4">
         <div class="col-md-3">
-          <div class="adflexbox" id="a4a584bdc567f35ace484102593db5a71"></div>
-<script>
-    (function(d, w) {
-        if (!w.adflex) {
-            var s = d.createElement("script");
-            s.type = "text/javascript";
-            s.src = "//portal.adstargets.com/loader.js";
-            d.getElementsByTagName('head')[0].appendChild(s);
-            w.adflex = {host: '//portal.adstargets.com'};
-        }
-    })(document, window);
-</script>
+          <section>
+            <% include ./ads/playLeft%>
+          </section>
         </div>
         <div class="col-md-6">
           <h6 class="btn text-white w-100 font-weight-bold" style="background-image: linear-gradient(to top, #CA7C0D, #F3CCC4);"><%-episode.anime%></h6>
@@ -61,34 +52,20 @@
 
         <!-- sidebar -->
         <div class="col-md-3">
-          <div class="adflexbox" id="afdaaa1911178d5cdc7bbb8b661f1525c"></div>
-<script>
-    (function(d, w) {
-        if (!w.adflex) {
-            var s = d.createElement("script");
-            s.type = "text/javascript";
-            s.src = "//portal.adstargets.com/loader.js";
-            d.getElementsByTagName('head')[0].appendChild(s);
-            w.adflex = {host: '//portal.adstargets.com'};
-        }
-    })(document, window);
-</script>
+          <section>
+            <% include ./ads/playRight%>
+          </section>
         </div>
       </div>
+      <section>
+        <% include ./ads/playBottom%>
+      </section>
     </div>
     <br/>
-    <div class="adflexbox" id="a7873a8c3334c04d4845ae6dc769886ac"></div>
-<script>
-    (function(d, w) {
-        if (!w.adflex) {
-            var s = d.createElement("script");
-            s.type = "text/javascript";
-            s.src = "//portal.adstargets.com/loader.js";
-            d.getElementsByTagName('head')[0].appendChild(s);
-            w.adflex = {host: '//portal.adstargets.com'};
-        }
-    })(document, window);
-</script>
+    <section>
+      <% include ./ads/playBottomBanner%>
+    </section>
+    <br/>
   </main>
   <br/>
   <!-- comments -->
